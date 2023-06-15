@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<List<PostModel>> getData() async {
     final response =
-        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+    await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
     var data = jsonDecode(response.body.toString());
 
     if (response.statusCode == 200) {
@@ -33,7 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Api check'),
+        title: const Text('Api check', style: TextStyle(
+          color: Colors.white
+        ),
+        ),
         backgroundColor: Colors.blue,
         centerTitle: true,
       ),
@@ -49,7 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     return ListView.builder(
                         itemCount: postList.length,
                         itemBuilder: (context, index) {
-                          return Text(index.toString());
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("User Id: ${postList[index].userId}"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("Title: ${postList[index].title}"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("Body: ${postList[index].body}"),
+
+                                ],
+                              ),
+                            ),
+                          );
                         });
                   }
                 }),
