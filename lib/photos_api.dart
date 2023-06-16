@@ -39,21 +39,24 @@ class _PhotosApiState extends State<PhotosApi> {
       ),
       body: Column(
         children: [
-          FutureBuilder(
-            future: getPhotos(),
-              builder: (context, snapshot){
-              if(!snapshot.hasData){
-                return Text('loading');
-              }else {
-                return ListView.builder(
-                    itemCount: photosList.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(snapshot.data![index].title.toString()),
-                      );
-                    });
-              }
-              }
+          Expanded(
+            child: FutureBuilder(
+              future: getPhotos(),
+                builder: (context, snapshot){
+                if(!snapshot.hasData){
+                  return Text('loading');
+                }else {
+                  return ListView.builder(
+                      itemCount: photosList.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: CircleAvatar(backgroundImage: NetworkImage(photosList[index].url)),
+                          title: Text(photosList[index].title.toString()),
+                        );
+                      });
+                }
+                }
+            ),
           )
         ],
       ),
