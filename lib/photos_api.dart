@@ -33,7 +33,7 @@ class _PhotosApiState extends State<PhotosApi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Photo Api'),
+        title: const Text('Photo Api'),
         backgroundColor: Colors.teal,
         centerTitle: true,
       ),
@@ -44,14 +44,15 @@ class _PhotosApiState extends State<PhotosApi> {
               future: getPhotos(),
                 builder: (context, snapshot){
                 if(!snapshot.hasData){
-                  return Text('loading');
+                  return const Text('loading');
                 }else {
                   return ListView.builder(
                       itemCount: photosList.length,
                       itemBuilder: (context, index) {
                         return ListTile(
                           leading: CircleAvatar(backgroundImage: NetworkImage(photosList[index].url)),
-                          title: Text(photosList[index].title.toString()),
+                          title: Text('Notes id: ${photosList[index].id}'),
+                          subtitle: Text(photosList[index].title.toString()),
                         );
                       });
                 }
