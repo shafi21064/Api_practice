@@ -34,9 +34,72 @@ class _GetUserApiState extends State<GetUserApi> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: const Text('user api '),
+        title: const Text('user api'),
+        backgroundColor: Colors.blue,
         centerTitle: true,
       ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder(
+                future: getUserApi(),
+                builder: (context, snapshot){
+                  if(!snapshot.hasData){
+                    return const Center(child: CircularProgressIndicator());
+                  }else{
+                    return ListView.builder(
+                      itemCount: userList.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  RowConponent(
+                                      title: 'Name:',
+                                      value: userList[index].name.toString()
+                                  ),
+                                  RowConponent(
+                                      title: 'User Name:',
+                                      value: userList[index].username.toString()
+                                  ),
+                                  RowConponent(
+                                      title: 'Email:',
+                                      value: userList[index].email.toString()
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                    );
+                  }
+                }
+            ),
+          )
+        ],
+      )
     );
   }
 }
+
+
+class RowConponent extends StatelessWidget {
+
+  String title, value;
+
+  RowConponent({super.key , required this.title, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Text(title),
+        Text(value)
+    ]
+    );
+  }
+}
+
