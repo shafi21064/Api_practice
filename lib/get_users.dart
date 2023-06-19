@@ -33,53 +33,60 @@ class _GetUserApiState extends State<GetUserApi> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        title: const Text('user api'),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-                future: getUserApi(),
-                builder: (context, snapshot){
-                  if(!snapshot.hasData){
-                    return const Center(child: CircularProgressIndicator());
-                  }else{
-                    return ListView.builder(
-                      itemCount: userList.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                children: [
-                                  RowConponent(
-                                      title: 'Name:',
-                                      value: userList[index].name.toString()
-                                  ),
-                                  RowConponent(
-                                      title: 'User Name:',
-                                      value: userList[index].username.toString()
-                                  ),
-                                  RowConponent(
-                                      title: 'Email:',
-                                      value: userList[index].email.toString()
-                                  ),
+        appBar: AppBar(
+          title: const Text('user api'),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: FutureBuilder(
+                    future: getUserApi(),
+                    builder: (context, snapshot){
+                      if(!snapshot.hasData){
+                        return const Center(child: CircularProgressIndicator());
+                      }else{
+                        return ListView.builder(
+                          itemCount: userList.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    RowConponent(
+                                        title: 'Name:',
+                                        value: userList[index].name.toString()
+                                    ),
+                                    RowConponent(
+                                        title: 'User Name:',
+                                        value: userList[index].username.toString()
+                                    ),
+                                    RowConponent(
+                                        title: 'Email:',
+                                        value: userList[index].email.toString()
+                                    ),
+                                    RowConponent(
+                                        title: 'Address:',
+                                        value: userList[index].address!.geo!.lat.toString()
+                                    ),
 
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                    );
-                  }
-                }
-            ),
-          )
-        ],
-      )
+                            );
+                          },
+                        );
+                      }
+                    }
+                ),
+              )
+            ],
+          ),
+        )
     );
   }
 }
@@ -96,9 +103,9 @@ class RowConponent extends StatelessWidget {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-        Text(title),
-        Text(value)
-    ]
+          Text(title),
+          Text(value)
+        ]
     );
   }
 }
