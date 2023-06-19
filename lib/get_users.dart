@@ -57,19 +57,19 @@ class _GetUserApiState extends State<GetUserApi> {
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   children: [
-                                    RowConponent(
+                                    RowComponent(
                                         title: 'Name:',
                                         value: userList[index].name.toString()
                                     ),
-                                    RowConponent(
+                                    RowComponent(
                                         title: 'User Name:',
                                         value: userList[index].username.toString()
                                     ),
-                                    RowConponent(
+                                    RowComponent(
                                         title: 'Email:',
                                         value: userList[index].email.toString()
                                     ),
-                                    RowConponent(
+                                    RowComponent(
                                         title: 'Address:',
                                         value: userList[index].address!.geo!.lat.toString()
                                     ),
@@ -92,11 +92,11 @@ class _GetUserApiState extends State<GetUserApi> {
 }
 
 
-class RowConponent extends StatelessWidget {
+class RowComponent extends StatelessWidget {
 
   String title, value;
 
-  RowConponent({super.key , required this.title, required this.value});
+  RowComponent({super.key , required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
